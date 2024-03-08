@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Home</title>
+	</head>
+	<body>
+		<h1>URls</h1>
+		<% if(locals.id){ %>
+		<p>
+			URL Generated:
+			<a href="http://localhost:8080/api/<%= id %>" target="_blank"
+				>http://localhost:8080/<%= id %></a
+			>
+		</p>
+		<% }%>
+		<div>
+			<form action="/url" method="post">
+				<input
+					type="text"
+					name="url"
+					placeholder="Enter your original URL"
+				/>
+				<input type="submit" />
+			</form>
+		</div>
+
+		<div>
+			<% if(locals.urls) { %>
+			<table>
+				<thead>
+					<th>S.No</th>
+					<th>Short ID</th>
+					<th>Redirect</th>
+					<th>Clicks</th>
+					<th>Link</th>
+				</thead>
+				<tbody>
+					<% urls.forEach((url,index) => { %>
+					<tr>
+						<td><%= index + 1%></td>
+						<td><%= url.shortId %></td>
+						<td><%= url.redirectURL %></td>
+						<td><%= url.visitHistory.length %></td>
+						<td>
+							<a
+								href="http://localhost:8080/api/<%= url.shortId %>"
+								target="_blank"
+								>Link</a
+							>
+						</td>
+						<% }) %>
+					</tr>
+				</tbody>
+			</table>
+			<% } %>
+		</div>
+	</body>
+</html>
